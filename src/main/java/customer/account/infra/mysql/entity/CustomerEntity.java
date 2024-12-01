@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+import org.springframework.lang.Nullable;
 
+import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Builder
@@ -35,10 +38,14 @@ public class CustomerEntity {
     @Column(name = "birth_date", nullable = false, updatable = false)
     private LocalDate birthDate;
 
-    public CustomerEntity(String name, String surname, String identityNo, LocalDate birthDate) {
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AccountEntity> accounts = new ArrayList<>();
+
+    public CustomerEntity(String name, String surname, String identityNo, LocalDate birthDate, List<AccountEntity> accounts) {
         this.name = name;
         this.surname = surname;
         this.identityNo = identityNo;
         this.birthDate = birthDate;
+        this.accounts = accounts;
     }
 }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
@@ -21,7 +22,7 @@ public class CustomerComponent {
     }
 
     public CustomerModel save(String name, String surname, String identityNo, LocalDate birthDate) {
-        CustomerEntity customerEntity = new CustomerEntity(name, surname, identityNo, birthDate);
+        CustomerEntity customerEntity = new CustomerEntity(name, surname, identityNo, birthDate,new ArrayList<>());
 
         final var savedEntity = customerRepository.save(customerEntity);
         return CustomerMapper.toCreateCustomerResponse(savedEntity);
