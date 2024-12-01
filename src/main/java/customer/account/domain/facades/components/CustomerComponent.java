@@ -16,6 +16,10 @@ import java.util.ArrayList;
 public class CustomerComponent {
     private final CustomerRepository customerRepository;
 
+    public boolean isCustomerExist(String id){
+        return customerRepository.existsById(id);
+    }
+
     public CustomerModel findById(String id){
         final var customerEntity = customerRepository.findById(id).orElseThrow(() -> new NotFoundException("Customer not found!"));
         return CustomerMapper.toGetCustomerDetailResponse(customerEntity);

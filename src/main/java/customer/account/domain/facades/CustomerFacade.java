@@ -17,6 +17,10 @@ public class CustomerFacade {
         return customerComponent.findById(id);
     }
 
+    public boolean isExist(String id) {
+        return customerComponent.isCustomerExist(id);
+    }
+
     public CustomerModel save(String name, String surname, String identityNo, LocalDate birthDate) {
         return customerComponent.save(name, surname, identityNo, birthDate);
     }
