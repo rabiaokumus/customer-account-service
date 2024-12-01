@@ -19,6 +19,7 @@ spring:
         hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         hibernate:
           format_sql: true
+
   liquibase:
     change-log: classpath:mysql/changelog/changelog-master.xml
 

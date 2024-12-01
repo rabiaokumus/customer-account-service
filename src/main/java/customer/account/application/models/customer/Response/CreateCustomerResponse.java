@@ -1,4 +1,4 @@
-package customer.account.application.models.customer;
+package customer.account.application.models.customer.Response;
 
 import customer.account.domain.models.CustomerModel;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetCustomerDetailResponse implements CustomerModel {
+public class CreateCustomerResponse implements CustomerModel {
     private String id;
 }
