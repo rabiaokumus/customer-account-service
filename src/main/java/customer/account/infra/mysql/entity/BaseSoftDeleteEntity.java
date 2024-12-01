@@ -25,14 +25,14 @@ public class BaseSoftDeleteEntity {
     public static final String DELETED_CLAUSE  = "deleted=false";
 
     @CreatedDate
-    @Column(name="createdAt", nullable = false, updatable = false)
+    @Column(name="created_at", nullable = false, updatable = false)
     private ZonedDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "updatedAt")
+    @Column(name = "updated_at")
     private ZonedDateTime updatedAt;
 
-    @Column(name = "deletedAt")
+    @Column(name = "deleted_at")
     private ZonedDateTime deletedAt;
 
     @Builder.Default

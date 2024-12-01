@@ -1,0 +1,50 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: customer-account-service
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/mydb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_REDIS_HOST=redis-sentinel
+      - SPRING_REDIS_SENTINEL_MASTER=mymaster
+    depends_on:
+      - mysql
+      - redis-sentinel
+
+  mysql:
+    image: docker.io/mysql:8.0
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: docker.io/redis:7
+    container_name: redis
+    command: ["redis-server", "--port", "6379"]
+    ports:
+      - "6379:6379"
+
+  redis-sentinel:
+    image: docker.io/redis:7
+    container_name: redis-sentinel
+    command:
+      - redis-sentinel
+      - /etc/redis/sentinel.conf
+    ports:
+      - "26379:26379"
+    volumes:
+      - ./sentinel.conf:/etc/redis/sentinel.conf
+
+volumes:
+  mysql_data:
