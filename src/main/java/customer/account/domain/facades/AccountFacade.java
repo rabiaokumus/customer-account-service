@@ -19,15 +19,19 @@ public class AccountFacade {
         if (initialCredit == 1)
             return accountComponent.save(customerId, name, amount);
 
-        return  null;
+        return null;
     }
 
     public GetAccountDetailResponseDto findById(String id) {
         return accountComponent.findById(id);
     }
 
-    public GetCustomerAccountsResponseDto findByCustomerId(String customerId){
+    public GetCustomerAccountsResponseDto findByCustomerId(String customerId) {
         return accountComponent.findByCustomerId(customerId);
+    }
+
+    public boolean isExist(String id) {
+        return accountComponent.isAccountExist(id);
     }
 }
 
