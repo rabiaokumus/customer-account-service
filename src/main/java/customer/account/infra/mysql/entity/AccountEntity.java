@@ -6,6 +6,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Getter
@@ -14,7 +16,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity(name = "accounts")
 @Table(name = "accounts")
-@SQLDelete(sql = "UPDATE notification_transaction SET deleted = true, deleted_at = now() WHERE id=?")
+@SQLDelete(sql = "UPDATE accounts SET deleted = true, deleted_at = now() WHERE id=?")
 @SQLRestriction(BaseSoftDeleteEntity.DELETED_CLAUSE)
 public class AccountEntity {
     @Id
@@ -22,10 +24,10 @@ public class AccountEntity {
     @Column(name = "id", length = 36, nullable = false, updatable = false)
     private String id;
 
-    @Column(name="customer_id", length = 50, nullable = false, updatable = false)
+    @Column(name = "customer_id", length = 36, nullable = false, updatable = false)
     private String customerId;
 
-    @Column(name = "balance", length = 100, nullable = false, updatable = false)
+    @Column(name = "balance", nullable = false, updatable = false)
     private BigDecimal balance;
 
     @Column(name = "name", length = 50, nullable = false, updatable = false)
@@ -35,9 +37,13 @@ public class AccountEntity {
     @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
     private CustomerEntity customer;
 
-    public AccountEntity(String customerId, String name, BigDecimal balance) {
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TransactionEntity> transactions = new ArrayList<>();
+
+    public AccountEntity(String customerId, String name, BigDecimal balance, List<TransactionEntity> transactions) {
         this.customerId = customerId;
         this.balance = balance;
         this.name = name;
+        this.transactions = transactions;
     }
 }

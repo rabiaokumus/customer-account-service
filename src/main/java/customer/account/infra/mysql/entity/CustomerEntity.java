@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "customers")
 @Table(name = "customers")
-@SQLDelete(sql = "UPDATE notification_transaction SET deleted = true, deleted_at = now() WHERE id=?")
+@SQLDelete(sql = "UPDATE customers SET deleted = true, deleted_at = now() WHERE id=?")
 @SQLRestriction(BaseSoftDeleteEntity.DELETED_CLAUSE)
 public class CustomerEntity {
     @Id
