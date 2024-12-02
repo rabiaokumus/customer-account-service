@@ -1,4 +1,3 @@
-# Use the official OpenJDK base image for Java 17
 FROM eclipse-temurin:21.0.2_13-jdk as stage
 
 # Install Maven
@@ -17,4 +16,4 @@ RUN mvn -f /app/pom.xml clean package -DskipTests
 EXPOSE 8080
 
 # Define the command to run the application
-CMD ["java", "-jar", "/app/target/communication-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/target/customeraccount-0.0.1-SNAPSHOT.jar"]
