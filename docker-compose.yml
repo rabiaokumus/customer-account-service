@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7504:7504"
+    environment:
+      - SERVER_PORT=7504
+      - SPRING_DATASOURCE_URL=jdbc:mysql://cas-mysql:3306/customer-account?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123456
+    depends_on:
+      - cas-mysql
+    networks:
+      - cas-network
+
+  cas-mysql:
+    image: mysql:8.0
+    container_name: cas-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: customer-account
+    ports:
+      - "3306:3306"
+    networks:
+      - cas-network
+
+networks:
+  cas-network:
+    driver: bridge
