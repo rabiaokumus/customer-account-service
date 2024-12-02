@@ -4,47 +4,29 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: customer-account-service
     ports:
-      - "8080:8080"
+      - "7504:7504"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/mydb
+      - SERVER_PORT=7504
+      - SPRING_DATASOURCE_URL=jdbc:mysql://cas-mysql:3306/customer-account?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_REDIS_HOST=redis-sentinel
-      - SPRING_REDIS_SENTINEL_MASTER=mymaster
+      - SPRING_DATASOURCE_PASSWORD=123456
     depends_on:
-      - mysql
-      - redis-sentinel
+      - cas-mysql
+    networks:
+      - cas-network
 
-  mysql:
-    image: docker.io/mysql:8.0
-    container_name: mysql
+  cas-mysql:
+    image: mysql:8.0
+    container_name: cas-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: customer-account
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
-    volumes:
-      - mysql_data:/var/lib/mysql
+    networks:
+      - cas-network
 
-  redis:
-    image: docker.io/redis:7
-    container_name: redis
-    command: ["redis-server", "--port", "6379"]
-    ports:
-      - "6379:6379"
-
-  redis-sentinel:
-    image: docker.io/redis:7
-    container_name: redis-sentinel
-    command:
-      - redis-sentinel
-      - /etc/redis/sentinel.conf
-    ports:
-      - "26379:26379"
-    volumes:
-      - ./sentinel.conf:/etc/redis/sentinel.conf
-
-volumes:
-  mysql_data:
+networks:
+  cas-network:
+    driver: bridge
