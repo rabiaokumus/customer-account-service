@@ -32,7 +32,7 @@ public class TransactionComponent {
         return TransactionMapper.toGetTransctionsByAccountIdResponseDto(transactionEntities);
     }
 
-    public TransactionEntity save(String accountId, BigDecimal amount, String externalId, Boolean direction) {
+    public TransactionEntity save(String accountId, BigDecimal amount, String externalId, Integer direction) {
         final var transactionEntity = transactionRepository.save(new TransactionEntity(accountId, direction, amount, externalId));
         return transactionRepository.save(transactionEntity);
     }

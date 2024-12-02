@@ -27,7 +27,7 @@ public class TransactionEntity {
     private String accountId;
 
     @Column(name = "direction", length = 1, nullable = false, updatable = false)
-    private Boolean direction;
+    private Integer direction;
 
     @Column(name = "amount", nullable = false, updatable = false)
     private BigDecimal amount;
@@ -39,7 +39,7 @@ public class TransactionEntity {
     @JoinColumn(name = "account_id", referencedColumnName = "id", insertable = false, updatable = false)
     private AccountEntity account;
 
-    public TransactionEntity(String accountId, Boolean direction, BigDecimal amount, String externalId) {
+    public TransactionEntity(String accountId, Integer direction, BigDecimal amount, String externalId) {
         this.accountId = accountId;
         this.direction = direction;
         this.amount = amount;

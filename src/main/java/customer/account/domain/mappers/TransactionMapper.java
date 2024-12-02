@@ -2,6 +2,7 @@ package customer.account.domain.mappers;
 
 import customer.account.application.models.transaction.Response.GetTransactionDetailResponseDto;
 import customer.account.application.models.transaction.Response.GetTransctionsByAccountIdResponseDto;
+import customer.account.domain.models.TransactionModel;
 import customer.account.infra.mysql.entity.TransactionEntity;
 
 import java.util.ArrayList;
@@ -41,5 +42,6 @@ public class TransactionMapper {
         transaction.setDirection(entity.getDirection());
         return transaction;
     }
+
 }
 

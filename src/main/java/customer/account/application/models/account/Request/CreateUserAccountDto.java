@@ -29,4 +29,8 @@ public class CreateUserAccountDto {
     @Nullable()
     @Size(max = 50, message = "name must be 50 characters")
     private String name;
+
+    @NotNull(message = "transactionId cannot be null")
+    @Size(min = 36, max = 36, message = "customerId must be 36 characters")
+    private String transactionId;
 }

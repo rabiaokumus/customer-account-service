@@ -23,7 +23,8 @@ public class AccountController {
                 dto.getCustomerId(),
                 dto.getName(),
                 dto.getAmount(),
-                dto.getInitialCredit());
+                dto.getInitialCredit(),
+                dto.getTransactionId());
     }
 
     @GetMapping("/{id}")

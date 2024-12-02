@@ -1,6 +1,5 @@
 package customer.account.application.models.transaction.Response;
 
-import customer.account.domain.models.AccountModel;
 import customer.account.domain.models.TransactionModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +21,8 @@ public class GetTransactionDetailResponseDto implements TransactionModel {
 
     private BigDecimal amount;
 
-    private Boolean direction;
+    private Integer direction;
+
 }
 
 

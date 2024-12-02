@@ -17,7 +17,7 @@ public class AccountMapper {
                 .build();
     }
 
-    public static GetAccountDetailResponseDto toGetAccountDetailResponse(AccountEntity entity){
+    public static GetAccountDetailResponseDto toGetAccountDetailResponse(AccountEntity entity) {
         return GetAccountDetailResponseDto.builder()
                 .id(entity.getId())
                 .balance(entity.getBalance())
@@ -25,7 +25,7 @@ public class AccountMapper {
                 .build();
     }
 
-    public static GetCustomerAccountsResponseDto toGetCustomerAccountsResponse(ArrayList<AccountEntity> list){
+    public static GetCustomerAccountsResponseDto toGetCustomerAccountsResponse(ArrayList<AccountEntity> list) {
         return GetCustomerAccountsResponseDto.builder()
                 .ids(list.stream()
                         .map(e -> e.getId())

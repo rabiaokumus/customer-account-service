@@ -29,7 +29,7 @@ public class GetTransctionsByAccountIdResponseDto {
         private String accountId;
         private String externalId;
         private BigDecimal amount;
-        private Boolean direction;
+        private Integer direction;
 
         public String getId() {
             return id;
@@ -63,11 +63,11 @@ public class GetTransctionsByAccountIdResponseDto {
             this.amount = amount;
         }
 
-        public Boolean getDirection() {
+        public Integer getDirection() {
             return direction;
         }
 
-        public void setDirection(Boolean direction) {
+        public void setDirection(Integer direction) {
             this.direction = direction;
         }
     }
