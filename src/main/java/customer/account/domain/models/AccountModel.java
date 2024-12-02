@@ -4,8 +4,4 @@ import java.math.BigDecimal;
 
 public interface AccountModel {
     String getId();
-
-    BigDecimal getBalance();
-
-    String getName();
 }

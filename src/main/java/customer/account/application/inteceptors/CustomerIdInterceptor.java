@@ -24,7 +24,7 @@ public class CustomerIdInterceptor implements HandlerInterceptor {
         String[] uriParts = uri.split("/");
 
         if (uriParts.length <= 4) {
-            String customerId = uriParts[2] == null ? uriParts[3] : uriParts[2];
+            String customerId = uriParts[3] == null ? uriParts[2] : uriParts[3];
 
             if (!isValidUserId(customerId)) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

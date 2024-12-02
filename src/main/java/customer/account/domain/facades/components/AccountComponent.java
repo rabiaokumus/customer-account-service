@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class AccountComponent {
     private final AccountRepository accountRepository;
 
-    public CreateCustomerAccountResponseDto save(String customerId, String name, BigDecimal amount) {
-        AccountEntity accountEntity = new AccountEntity(customerId, name, amount, new ArrayList<>());
+    public CreateCustomerAccountResponseDto save(String customerId, BigDecimal amount) {
+        AccountEntity accountEntity = new AccountEntity(customerId, amount, new ArrayList<>());
 
         final var savedEntity = accountRepository.save(accountEntity);
         return AccountMapper.toCreateUserAccountResponse(savedEntity);

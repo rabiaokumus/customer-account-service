@@ -13,7 +13,6 @@ public class AccountMapper {
         return CreateCustomerAccountResponseDto.builder()
                 .id(entity.getId())
                 .balance(entity.getBalance())
-                .name(entity.getName())
                 .build();
     }
 
@@ -21,7 +20,6 @@ public class AccountMapper {
         return GetAccountDetailResponseDto.builder()
                 .id(entity.getId())
                 .balance(entity.getBalance())
-                .name(entity.getName())
                 .build();
     }
 

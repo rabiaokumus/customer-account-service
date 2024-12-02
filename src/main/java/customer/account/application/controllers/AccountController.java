@@ -19,12 +19,7 @@ public class AccountController {
 
     @PostMapping()
     private CreateCustomerAccountResponseDto create(@Valid @RequestBody CreateUserAccountDto dto) {
-        return accountFacade.save(
-                dto.getCustomerId(),
-                dto.getName(),
-                dto.getAmount(),
-                dto.getInitialCredit(),
-                dto.getTransactionId());
+        return accountFacade.save(dto.getCustomerId(), dto.getInitialCredit(), dto.getTransactionId());
     }
 
     @GetMapping("/{id}")

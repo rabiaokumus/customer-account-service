@@ -30,9 +30,6 @@ public class AccountEntity {
     @Column(name = "balance", nullable = false, updatable = false)
     private BigDecimal balance;
 
-    @Column(name = "name", length = 50, nullable = false, updatable = false)
-    private String name;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
     private CustomerEntity customer;
@@ -40,10 +37,9 @@ public class AccountEntity {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TransactionEntity> transactions = new ArrayList<>();
 
-    public AccountEntity(String customerId, String name, BigDecimal balance, List<TransactionEntity> transactions) {
+    public AccountEntity(String customerId,  BigDecimal balance, List<TransactionEntity> transactions) {
         this.customerId = customerId;
         this.balance = balance;
-        this.name = name;
         this.transactions = transactions;
     }
 }

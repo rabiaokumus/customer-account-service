@@ -1,6 +1,5 @@
 package customer.account.application.models.transaction.Response;
 
-import customer.account.domain.models.TransactionModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetTransctionsByAccountIdResponseDto {
+public class GetTransctionsByAccountIdResponseDto  {
     private ArrayList<Transaction> transactions;
 
     public ArrayList<Transaction> getTransactions() {
