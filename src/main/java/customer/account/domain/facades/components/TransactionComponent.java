@@ -1,10 +1,10 @@
 package customer.account.domain.facades.components;
 
+import customer.account.application.models.transaction.Response.CreateTransactionResponseDto;
 import customer.account.application.models.transaction.Response.GetTransctionsByAccountIdResponseDto;
 import customer.account.domain.exceptions.NotFoundException;
 import customer.account.domain.mappers.TransactionMapper;
 import customer.account.domain.models.TransactionModel;
-import customer.account.infra.mysql.entity.AccountEntity;
 import customer.account.infra.mysql.entity.TransactionEntity;
 import customer.account.infra.mysql.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +32,9 @@ public class TransactionComponent {
         return TransactionMapper.toGetTransctionsByAccountIdResponseDto(transactionEntities);
     }
 
-    public TransactionEntity save(String accountId, BigDecimal amount, String externalId, Boolean direction) {
+    public CreateTransactionResponseDto save(String accountId, BigDecimal amount, String externalId, Integer direction) {
         final var transactionEntity = transactionRepository.save(new TransactionEntity(accountId, direction, amount, externalId));
-        return transactionRepository.save(transactionEntity);
+        return TransactionMapper.toResponse(transactionEntity);
     }
 }
 

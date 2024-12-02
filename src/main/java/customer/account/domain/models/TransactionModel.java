@@ -7,7 +7,7 @@ public interface TransactionModel {
 
     String getAccountId();
 
-    Boolean getDirection();
+    Integer getDirection();
 
     BigDecimal getAmount();
 

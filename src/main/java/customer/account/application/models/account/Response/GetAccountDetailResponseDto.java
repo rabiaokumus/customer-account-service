@@ -16,6 +16,4 @@ public class GetAccountDetailResponseDto implements AccountModel {
     private String id;
 
     private BigDecimal balance;
-
-    private String name;
 }

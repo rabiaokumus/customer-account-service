@@ -16,6 +16,4 @@ public class CreateCustomerAccountResponseDto implements AccountModel {
     private String id;
 
     private  BigDecimal balance;
-
-    private String name;
 }

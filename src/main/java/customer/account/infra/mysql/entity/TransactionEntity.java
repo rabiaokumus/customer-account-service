@@ -1,12 +1,11 @@
 package customer.account.infra.mysql.entity;
 
+import customer.account.domain.models.TransactionModel;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
-
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @Builder
 @Getter
@@ -17,7 +16,7 @@ import java.util.Optional;
 @Table(name = "transactions")
 @SQLDelete(sql = "UPDATE transactions SET deleted = true, deleted_at = now() WHERE id=?")
 @SQLRestriction(BaseSoftDeleteEntity.DELETED_CLAUSE)
-public class TransactionEntity {
+public class TransactionEntity implements TransactionModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false, updatable = false)
@@ -27,7 +26,7 @@ public class TransactionEntity {
     private String accountId;
 
     @Column(name = "direction", length = 1, nullable = false, updatable = false)
-    private Boolean direction;
+    private Integer direction;
 
     @Column(name = "amount", nullable = false, updatable = false)
     private BigDecimal amount;
@@ -39,7 +38,7 @@ public class TransactionEntity {
     @JoinColumn(name = "account_id", referencedColumnName = "id", insertable = false, updatable = false)
     private AccountEntity account;
 
-    public TransactionEntity(String accountId, Boolean direction, BigDecimal amount, String externalId) {
+    public TransactionEntity(String accountId, Integer direction, BigDecimal amount, String externalId) {
         this.accountId = accountId;
         this.direction = direction;
         this.amount = amount;

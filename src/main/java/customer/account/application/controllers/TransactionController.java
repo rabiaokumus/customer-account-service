@@ -21,8 +21,8 @@ public class TransactionController {
         return transactionFacade.findById(id.toString());
     }
 
-    @GetMapping("/{externalId}")
-    private GetTransactionDetailResponseDto findByExternalId(@PathVariable("externalId") UUID externalId) {
+    @GetMapping()
+    private GetTransactionDetailResponseDto findByExternalId(@RequestParam("externalId") UUID externalId) {
         return transactionFacade.findByExternalId(externalId.toString());
     }
     @GetMapping("/account/{accountId}")

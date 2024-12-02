@@ -4,8 +4,10 @@ import customer.account.application.models.account.Response.CreateCustomerAccoun
 import customer.account.application.models.account.Response.GetAccountDetailResponseDto;
 import customer.account.application.models.account.Response.GetCustomerAccountsResponseDto;
 import customer.account.domain.facades.components.AccountComponent;
+import customer.account.domain.models.enums.Direction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -14,12 +16,19 @@ import java.math.BigDecimal;
 public class AccountFacade {
     private final AccountComponent accountComponent;
 
-    public CreateCustomerAccountResponseDto save(String customerId, String name, BigDecimal amount, Integer initialCredit) {
-        // TODO add control initialCredit for to save transaction
-        if (initialCredit == 1)
-            return accountComponent.save(customerId, name, amount);
+    private final TransactionFacade transactionFacade;
 
-        return null;
+    @Transactional
+    public CreateCustomerAccountResponseDto save(String customerId, BigDecimal initialCredit, String transactionId) {
+        final var account = accountComponent.save(customerId, initialCredit);
+
+        if(initialCredit.compareTo(BigDecimal.valueOf(0)) > 0){
+            transactionFacade.save(account.getId(), initialCredit,transactionId, Direction.IN.getValue());
+        }
+
+        CreateCustomerAccountResponseDto response = new CreateCustomerAccountResponseDto();
+        response.setId(account.getId());
+        return response;
     }
 
     public GetAccountDetailResponseDto findById(String id) {

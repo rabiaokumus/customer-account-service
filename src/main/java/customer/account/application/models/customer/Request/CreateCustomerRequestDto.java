@@ -1,6 +1,5 @@
 package customer.account.application.models.customer.Request;
 
-import customer.account.application.annotation.ValidAgeConstraint;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +24,5 @@ public class CreateCustomerRequestDto {
     String identityNo;
 
     @NotNull(message = "Birth date is required")
-    @ValidAgeConstraint(message = "Customer must be at least 18 years old")
     LocalDate birthDate;
 }
