@@ -30,3 +30,7 @@ mvn test
 
 The API reference documentation is available at http://localhost:7504/swagger-ui/index.html
 It provides detailed information about the available endpoints, request and response formats, and sample code snippets.
+
+
+## Database Diagram
+The database diagram is available at https://dbdiagram.io/d/6663056e9713410b0506ab15 
