@@ -24,7 +24,7 @@ public class AccountIdInterceptor implements HandlerInterceptor {
         String[] uriParts = uri.split("/");
 
         if (uriParts.length <= 4) {
-            String accountId = uriParts[3] == null ? uriParts[2] : uriParts[3];
+            String accountId = uriParts[uriParts.length - 1] ;
 
             if (!isValidAccountId(accountId)) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

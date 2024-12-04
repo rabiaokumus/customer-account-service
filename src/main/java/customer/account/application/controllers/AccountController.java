@@ -29,7 +29,7 @@ public class AccountController {
     }
 
     @GetMapping("/customer/{customerId}")
-    private GetCustomerAccountsResponseDto getCustomerAccounts(@PathVariable UUID customerId) {
+    private GetCustomerAccountsResponseDto getCustomerAccounts(@PathVariable("customerId") UUID customerId) {
         return accountFacade.findByCustomerId(customerId.toString());
     }
 }
