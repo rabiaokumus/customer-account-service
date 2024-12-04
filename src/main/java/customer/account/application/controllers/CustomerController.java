@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@Validated
+@CrossOrigin
 @RestController
 @RequestMapping("/customer")
 @RequiredArgsConstructor

@@ -28,6 +28,7 @@ public class AccountFacade {
 
         CreateCustomerAccountResponseDto response = new CreateCustomerAccountResponseDto();
         response.setId(account.getId());
+        response.setBalance(initialCredit);
         return response;
     }
 
